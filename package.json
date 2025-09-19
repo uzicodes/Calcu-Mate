@@ -1,7 +1,8 @@
 {
-  "name": "pro-calc-app",
+  "name": "calc-mate",
   "version": "0.1.0",
   "private": true,
+  "description": "Calc-mate - A comprehensive calculator web application with multiple calculator types",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

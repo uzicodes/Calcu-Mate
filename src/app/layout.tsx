@@ -5,8 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Pro Calculator",
-  description: "A comprehensive calculator web application with multiple calculator types",
+  title: "Calc-mate",
+  description: "Calc-mate - A comprehensive calculator web application with multiple calculator types",
 };
 
 export default function RootLayout({

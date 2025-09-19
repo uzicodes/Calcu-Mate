@@ -1,6 +1,6 @@
-# Pro Calculator
+# Calc-mate
 
-A comprehensive calculator web application built with the MERN stack (MongoDB, Express, React, Node.js) using TypeScript. This application provides multiple types of calculators in a modern, responsive interface.
+A comprehensive calculator web application built with Next.js and TypeScript. This application provides multiple types of calculators in a modern, responsive interface.
 
 ## Features
 
@@ -15,11 +15,10 @@ A comprehensive calculator web application built with the MERN stack (MongoDB, E
 
 ## Tech Stack
 
-- **Frontend**: React 18 with TypeScript
-- **Backend**: Node.js with Express and TypeScript
-- **Styling**: CSS3 with modern design principles
-- **Routing**: React Router for client-side navigation
-- **Build Tools**: Create React App for frontend, TypeScript compiler for backend
+- **Frontend**: Next.js 15 with TypeScript
+- **Styling**: Tailwind CSS with modern design principles
+- **Routing**: Next.js App Router for client-side navigation
+- **Build Tools**: Next.js built-in build system
 
 ## Getting Started
 
@@ -63,34 +62,34 @@ npm start
 ## Project Structure
 
 ```
-pro-calc/
-├── client/                 # React frontend
-│   ├── public/
-│   ├── src/
-│   │   ├── components/     # React components
-│   │   │   ├── calculators/ # Calculator components
-│   │   │   └── HomePage.tsx
-│   │   ├── App.tsx        # Main App component
-│   │   └── index.tsx      # React entry point
-│   └── package.json
-├── src/                   # Backend source
-│   └── server.ts          # Express server
-├── dist/                  # Compiled backend
-├── package.json           # Root package.json
+calc-mate/
+├── public/                # Static assets
+├── server/                # Server-side code
+├── src/                   # Source code
+│   └── app/              # Next.js App Router
+│       ├── calculator/   # Calculator pages
+│       │   ├── basic/
+│       │   ├── scientific/
+│       │   ├── percentage/
+│       │   ├── currency/
+│       │   ├── unit/
+│       │   ├── age/
+│       │   ├── bmi/
+│       │   └── loan/
+│       ├── globals.css
+│       ├── layout.tsx
+│       └── page.tsx
+├── package.json          # Dependencies and scripts
+├── tailwind.config.js    # Tailwind CSS configuration
 └── tsconfig.json         # TypeScript configuration
 ```
 
 ## Available Scripts
 
-- `npm run dev` - Start development servers
+- `npm run dev` - Start development server
 - `npm run build` - Build for production
 - `npm start` - Start production server
-- `npm run install:all` - Install all dependencies
-- `npm run clean` - Clean build directories
-
-## API Endpoints
-
-- `POST /api/calculate` - Calculate expressions (for future API integration)
+- `npm run lint` - Run ESLint
 
 ## Contributing
 
