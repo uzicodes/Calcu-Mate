@@ -18,12 +18,7 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: linear-gradient(135deg, #0F372F 0%, #1a4a3f 100%);
 }
 
 /* Custom styles for calculator components */
@@ -36,11 +31,11 @@ body {
 }
 
 .back-btn {
-  @apply bg-white bg-opacity-20 border-none text-white px-5 py-2.5 rounded-lg cursor-pointer text-base mr-5 transition-all duration-300 hover:bg-opacity-30;
+  @apply bg-calc-gold bg-opacity-90 border-none text-calc-dark px-5 py-2.5 rounded-lg cursor-pointer text-base mr-5 transition-all duration-300 hover:bg-calc-gold-light hover:shadow-lg font-semibold;
 }
 
 .calculator-header h1 {
-  @apply text-4xl font-semibold drop-shadow-lg;
+  @apply text-4xl font-semibold drop-shadow-lg text-calc-gold;
 }
 
 .calculator {
@@ -80,23 +75,23 @@ body {
 }
 
 .btn-number:hover {
-  @apply bg-gray-50 border-blue-500;
+  @apply bg-gray-50 border-calc-gold;
 }
 
 .btn-operator {
-  @apply bg-blue-500 text-white;
+  @apply bg-calc-dark text-white;
 }
 
 .btn-operator:hover {
-  @apply bg-blue-600;
+  @apply bg-calc-dark-light;
 }
 
 .btn-equals {
-  @apply bg-green-500 text-white row-span-2;
+  @apply bg-calc-gold text-calc-dark row-span-2 font-bold;
 }
 
 .btn-equals:hover {
-  @apply bg-green-600;
+  @apply bg-calc-gold-light;
 }
 
 .btn-clear {
@@ -116,7 +111,7 @@ body {
 }
 
 .scientific-btn {
-  @apply p-4 text-base font-medium border-none rounded-lg cursor-pointer transition-all duration-200 bg-gray-200 text-gray-800 hover:bg-gray-300 hover:-translate-y-0.5;
+  @apply p-4 text-base font-medium border-none rounded-lg cursor-pointer transition-all duration-200 bg-calc-gold-light text-calc-dark hover:bg-calc-gold hover:-translate-y-0.5 font-semibold;
 }
 
 .calculator-grid {
@@ -124,7 +119,7 @@ body {
 }
 
 .calculator-card {
-  @apply bg-white rounded-2xl p-8 text-center shadow-lg transition-all duration-300 cursor-pointer border-2 border-transparent hover:-translate-y-1 hover:shadow-xl hover:border-blue-500 no-underline text-inherit;
+  @apply bg-white rounded-2xl p-8 text-center shadow-lg transition-all duration-300 cursor-pointer border-2 border-transparent hover:-translate-y-1 hover:shadow-xl hover:border-calc-gold hover:shadow-calc-gold/20 no-underline text-inherit;
 }
 
 .calculator-icon {

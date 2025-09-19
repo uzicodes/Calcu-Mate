@@ -48,7 +48,7 @@ export default function LoanCalculator() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600">
+    <div className="min-h-screen bg-calc-gradient">
       <div className="calculator-container">
         <div className="calculator-header">
           <Link href="/" className="back-btn">← Back</Link>

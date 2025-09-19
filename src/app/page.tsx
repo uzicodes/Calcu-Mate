@@ -60,10 +60,10 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600">
+    <div className="min-h-screen bg-calc-gradient">
       <div className="container mx-auto px-5 py-8 min-h-screen flex flex-col">
         <header className="text-center mb-10 text-white">
-          <h1 className="text-5xl font-bold mb-2.5 drop-shadow-lg">Calc-mate</h1>
+          <h1 className="text-5xl font-bold mb-2.5 drop-shadow-lg text-calc-gold">Calc-mate</h1>
           <p className="text-xl font-light opacity-90">Choose your calculator type</p>
         </header>
 
@@ -73,17 +73,17 @@ export default function HomePage() {
               <Link
                 key={calculator.id}
                 href={`/calculator/${calculator.id}`}
-                className="calculator-card"
+                className="calculator-card hover:border-calc-gold hover:shadow-calc-gold/20"
               >
-                <div className="calculator-icon">{calculator.icon}</div>
-                <h3>{calculator.name}</h3>
-                <p>{calculator.description}</p>
+                <div className="calculator-icon text-6xl">{calculator.icon}</div>
+                <h3 className="text-calc-dark font-semibold">{calculator.name}</h3>
+                <p className="text-gray-600">{calculator.description}</p>
               </Link>
             ))}
           </div>
         </main>
 
-        <footer className="text-center mt-10 text-white opacity-80 text-sm">
+        <footer className="text-center mt-10 text-calc-gold opacity-80 text-sm">
           <p>&copy; 2024 Calc-mate. Built with Next.js & TypeScript</p>
         </footer>
       </div>
