@@ -63,8 +63,8 @@ export default function HomePage() {
     <div className="min-h-screen bg-calc-gradient">
       <div className="container mx-auto px-5 py-8 min-h-screen flex flex-col">
         <header className="text-center mb-10 text-white">
-          <h1 className="text-5xl font-bold mb-2.5 drop-shadow-lg text-calc-gold">Calcu-mate</h1>
-          <p className="text-xl font-light opacity-90">Choose your calculator type</p>
+          <h1 className="text-5xl font-bold mb-2.5 drop-shadow-lg text-calc-gold">Calcu-Mate</h1>
+          <p className="text-xl font-light opacity-90">Choose your calculator !</p>
         </header>
 
         <main className="flex-1 flex justify-center items-center">
