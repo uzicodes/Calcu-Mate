@@ -32,7 +32,7 @@ A comprehensive calculator web application built with Next.js and TypeScript. Th
 1. Clone the repository:
 ```bash
 git clone <repository-url>
-cd pro-calc
+cd calcu-mate
 ```
 
 2. Install dependencies for both frontend and backend:
@@ -62,7 +62,7 @@ npm start
 ## Project Structure
 
 ```
-calc-mate/
+calcu-mate/
 ├── public/                # Static assets
 ├── server/                # Server-side code
 ├── src/                   # Source code

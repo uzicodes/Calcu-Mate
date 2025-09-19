@@ -63,7 +63,7 @@ export default function HomePage() {
     <div className="min-h-screen bg-calc-gradient">
       <div className="container mx-auto px-5 py-8 min-h-screen flex flex-col">
         <header className="text-center mb-10 text-white">
-          <h1 className="text-5xl font-bold mb-2.5 drop-shadow-lg text-calc-gold">Calc-mate</h1>
+          <h1 className="text-5xl font-bold mb-2.5 drop-shadow-lg text-calc-gold">Calcu-mate</h1>
           <p className="text-xl font-light opacity-90">Choose your calculator type</p>
         </header>
 
@@ -84,7 +84,7 @@ export default function HomePage() {
         </main>
 
         <footer className="text-center mt-10 text-calc-gold opacity-80 text-sm">
-          <p>&copy; 2024 Calc-mate. Built with Next.js & TypeScript</p>
+          <p>&copy; 2024 Calcu-mate. Built with Next.js & TypeScript</p>
         </footer>
       </div>
     </div>
