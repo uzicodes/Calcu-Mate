@@ -1,4 +1,4 @@
-# Calc-mate
+# Calcu-mate
 
 A comprehensive calculator web application built with Next.js and TypeScript. This application provides multiple types of calculators in a modern, responsive interface.
 
