@@ -84,7 +84,7 @@ export default function HomePage() {
         </main>
 
         <footer className="text-center mt-10 text-calc-gold opacity-80 text-sm">
-          <p>&copy; 2024 Calcu-mate. Built with Next.js & TypeScript</p>
+          <p>&copy; 2025 Calcu-Mate. © All rights Reserved </p>
         </footer>
       </div>
     </div>
