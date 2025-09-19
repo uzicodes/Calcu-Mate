@@ -1,0 +1,189 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+/* Custom styles for calculator components */
+.calculator-container {
+  @apply max-w-4xl mx-auto p-5 min-h-screen flex flex-col;
+}
+
+.calculator-header {
+  @apply flex items-center mb-8 text-white;
+}
+
+.back-btn {
+  @apply bg-white bg-opacity-20 border-none text-white px-5 py-2.5 rounded-lg cursor-pointer text-base mr-5 transition-all duration-300 hover:bg-opacity-30;
+}
+
+.calculator-header h1 {
+  @apply text-4xl font-semibold drop-shadow-lg;
+}
+
+.calculator {
+  @apply bg-white rounded-2xl p-8 shadow-2xl flex-1;
+}
+
+.display {
+  @apply bg-gray-50 rounded-xl p-5 mb-5 text-right min-h-20 flex flex-col justify-center;
+}
+
+.previous-operand {
+  @apply text-xl text-gray-500 mb-1 min-h-5;
+}
+
+.current-operand {
+  @apply text-4xl font-semibold text-gray-800 break-words;
+}
+
+.buttons {
+  @apply grid grid-cols-4 gap-4;
+}
+
+.btn {
+  @apply p-5 text-xl font-semibold border-none rounded-xl cursor-pointer transition-all duration-200 bg-gray-100 text-gray-800 border-2 border-transparent hover:-translate-y-0.5 hover:shadow-lg;
+}
+
+.btn:hover {
+  @apply transform;
+}
+
+.btn:active {
+  @apply translate-y-0;
+}
+
+.btn-number {
+  @apply bg-white border-gray-200;
+}
+
+.btn-number:hover {
+  @apply bg-gray-50 border-blue-500;
+}
+
+.btn-operator {
+  @apply bg-blue-500 text-white;
+}
+
+.btn-operator:hover {
+  @apply bg-blue-600;
+}
+
+.btn-equals {
+  @apply bg-green-500 text-white row-span-2;
+}
+
+.btn-equals:hover {
+  @apply bg-green-600;
+}
+
+.btn-clear {
+  @apply bg-red-500 text-white;
+}
+
+.btn-clear:hover {
+  @apply bg-red-600;
+}
+
+.btn-zero {
+  @apply col-span-2;
+}
+
+.scientific-buttons {
+  @apply grid grid-cols-5 gap-2.5 mb-4;
+}
+
+.scientific-btn {
+  @apply p-4 text-base font-medium border-none rounded-lg cursor-pointer transition-all duration-200 bg-gray-200 text-gray-800 hover:bg-gray-300 hover:-translate-y-0.5;
+}
+
+.calculator-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 w-full max-w-6xl;
+}
+
+.calculator-card {
+  @apply bg-white rounded-2xl p-8 text-center shadow-lg transition-all duration-300 cursor-pointer border-2 border-transparent hover:-translate-y-1 hover:shadow-xl hover:border-blue-500 no-underline text-inherit;
+}
+
+.calculator-icon {
+  @apply text-5xl mb-4 block;
+}
+
+.calculator-card h3 {
+  @apply text-2xl font-semibold mb-2.5 text-gray-800;
+}
+
+.calculator-card p {
+  @apply text-gray-600 text-sm leading-relaxed;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .calculator-container {
+    @apply p-4;
+  }
+  
+  .calculator-header h1 {
+    @apply text-3xl;
+  }
+  
+  .calculator {
+    @apply p-6;
+  }
+  
+  .buttons {
+    @apply gap-2.5;
+  }
+  
+  .btn {
+    @apply p-4 text-base;
+  }
+  
+  .current-operand {
+    @apply text-3xl;
+  }
+  
+  .scientific-buttons {
+    @apply grid-cols-4;
+  }
+}
+
+@media (max-width: 480px) {
+  .calculator-grid {
+    @apply grid-cols-1;
+  }
+  
+  .buttons {
+    @apply grid-cols-4 gap-2;
+  }
+  
+  .btn {
+    @apply p-3 text-sm;
+  }
+  
+  .scientific-buttons {
+    @apply grid-cols-3;
+  }
+}
