@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 interface Calculator {
   id: string;
@@ -72,11 +73,16 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Brand */}
-            <div className="flex items-center">
+            <div className="flex items-center space-x-3">
+              <Image
+                src="/logo.png"
+                alt="Calcu-Mate Logo"
+                width={32}
+                height={32}
+                className="drop-shadow-sm"
+              />
               <span className="text-2xl text-calc-gold font-cinzel">
-                CALCU
-                <span className="text-yellow-400">⚡</span>
-                MATE
+                CALCU-MATE
               </span>
             </div>
 
@@ -117,10 +123,19 @@ export default function HomePage() {
 
       <div className="container mx-auto px-5 py-8 min-h-screen flex flex-col">
         <header className="text-center mb-10 text-white">
+          <div className="mb-6">
+            <Image
+              src="/logo.png"
+              alt="Calcu-Mate Logo"
+              width={120}
+              height={120}
+              className="mx-auto drop-shadow-lg"
+            />
+          </div>
           <h1 className="text-7xl font-bold mb-2.5 drop-shadow-2xl bungee-spice-title">
             CALCU-MATE
           </h1>
-          <p className="text-xl font-light opacity-90">Choose your calculator and start calculating!</p>
+          <p className="text-xl font-light opacity-90">Choose your calculator !</p>
         </header>
 
         <main className="flex-1 flex justify-center items-center">
