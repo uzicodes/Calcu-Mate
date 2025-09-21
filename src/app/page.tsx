@@ -81,6 +81,12 @@ export default function HomePage() {
       name: 'Base Converter',
       description: 'Convert numbers between different bases',
       icon: '🔀'
+    },
+    {
+      id: 'truth-table',
+      name: 'Truth Table Generator',
+      description: 'Create and analyze truth tables for boolean expressions',
+      icon: '📊'
     }
   ];
 
