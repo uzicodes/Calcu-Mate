@@ -59,6 +59,20 @@ export default function CurrencyCalculator() {
   };
 
   const currencies = Object.keys(exchangeRates);
+  
+  const currencyNames: { [key: string]: string } = {
+    USD: 'USD (United States)',
+    EUR: 'EUR (European Union)',
+    GBP: 'GBP (United Kingdom)',
+    JPY: 'JPY (Japan)',
+    CAD: 'CAD (Canada)',
+    AUD: 'AUD (Australia)',
+    CHF: 'CHF (Switzerland)',
+    CNY: 'CNY (China)',
+    INR: 'INR (India)',
+    BRL: 'BRL (Brazil)',
+    BDT: 'BDT (Bangladesh)'
+  };
 
   return (
     <div className="min-h-screen bg-calc-gradient">
@@ -99,7 +113,7 @@ export default function CurrencyCalculator() {
                 className="w-full p-2.5 rounded-lg border-2 border-gray-200 text-base"
               >
                 {currencies.map(currency => (
-                  <option key={currency} value={currency}>{currency}</option>
+                  <option key={currency} value={currency}>{currencyNames[currency]}</option>
                 ))}
               </select>
             </div>
@@ -114,7 +128,7 @@ export default function CurrencyCalculator() {
                 className="w-full p-2.5 rounded-lg border-2 border-gray-200 text-base"
               >
                 {currencies.map(currency => (
-                  <option key={currency} value={currency}>{currency}</option>
+                  <option key={currency} value={currency}>{currencyNames[currency]}</option>
                 ))}
               </select>
             </div>
