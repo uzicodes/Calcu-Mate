@@ -20,7 +20,8 @@ export default function CurrencyCalculator() {
     CHF: 0.92,
     CNY: 6.45,
     INR: 75,
-    BRL: 5.2
+    BRL: 5.2,
+    BDT: 110
   };
 
   const calculateCurrency = (): void => {

@@ -85,7 +85,7 @@ export default function HomePage() {
     {
       id: 'truth-table',
       name: 'Truth Table Generator',
-      description: 'Create and analyze truth tables for boolean expressions',
+      description: 'Create & analyze truth tables for boolean expressions',
       icon: '📊'
     }
   ];
