@@ -7,6 +7,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'cinzel': ['var(--font-cinzel)', 'serif'],
+        'bungee-spice': ['var(--font-bungee-spice)', 'cursive'],
+      },
       colors: {
         'calc-dark': '#0F372F',
         'calc-gold': '#ECBC6B',

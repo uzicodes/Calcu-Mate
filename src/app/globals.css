@@ -140,6 +140,7 @@ body {
 
 .navbar-brand {
   @apply text-2xl font-bold text-calc-gold;
+  font-family: var(--font-cinzel), serif;
 }
 
 .navbar-button {
@@ -148,6 +149,36 @@ body {
 
 .navbar-icon-button {
   @apply p-2 rounded-lg bg-gray-800 hover:bg-gray-700 text-white transition-colors duration-200;
+}
+
+/* Brand and heading font classes */
+.font-cinzel {
+  font-family: var(--font-cinzel), serif;
+}
+
+.font-bungee-spice {
+  font-family: var(--font-bungee-spice), cursive;
+}
+
+/* Enhanced Bungee Spice heading styling */
+.bungee-spice-title {
+  font-family: var(--font-bungee-spice), cursive;
+  background: linear-gradient(45deg, #ff6b35, #f7931e, #ffd23f, #ff6b35);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 3s ease-in-out infinite;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 .calculator-grid {
