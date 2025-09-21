@@ -56,6 +56,12 @@ export default function HomePage() {
       name: 'Loan Calculator',
       description: 'Calculate loan payments and interest',
       icon: '🏦'
+    },
+    {
+      id: 'base',
+      name: 'Base Converter',
+      description: 'Convert numbers between different bases',
+      icon: '🔀'
     }
   ];
 
