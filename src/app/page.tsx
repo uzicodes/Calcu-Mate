@@ -1,5 +1,8 @@
+'use client';
+
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
 
 interface Calculator {
   id: string;
@@ -9,6 +12,15 @@ interface Calculator {
 }
 
 export default function HomePage() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    description: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const calculators: Calculator[] = [
     {
       id: 'basic',
@@ -66,6 +78,51 @@ export default function HomePage() {
     }
   ];
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      // Using a simple form submission service (you can replace with EmailJS or other service)
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          to: 'utshozi11@gmail.com'
+        }),
+      });
+
+      if (response.ok) {
+        alert('Bug report submitted successfully!');
+        setFormData({ name: '', email: '', subject: '', description: '' });
+        setIsModalOpen(false);
+      } else {
+        throw new Error('Failed to submit');
+      }
+    } catch (error) {
+      // Fallback: Create mailto link
+      const mailtoLink = `mailto:utshozi11@gmail.com?subject=${encodeURIComponent(`Bug Report: ${formData.subject}`)}&body=${encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\n\nDescription:\n${formData.description}`
+      )}`;
+      window.open(mailtoLink, '_blank');
+      alert('Opening email client...');
+      setIsModalOpen(false);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-calc-gradient">
       {/* Navbar */}
@@ -100,13 +157,14 @@ export default function HomePage() {
                 </svg>
               </a>
               
-              {/* Theme Toggle Button (placeholder for now) */}
+              {/* Bug Report Button */}
               <button 
+                onClick={() => setIsModalOpen(true)}
                 className="p-2 rounded-lg bg-gray-800 hover:bg-gray-700 text-white transition-colors duration-200"
-                title="Toggle theme"
+                title="Report a Bug"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
+                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                 </svg>
               </button>
 
@@ -161,6 +219,94 @@ export default function HomePage() {
           <p>&copy; 2025 Calcu-Mate. © All rights Reserved </p>
         </footer>
       </div>
+
+      {/* Bug Report Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-gray-900 rounded-lg p-6 w-full max-w-md border border-gray-700">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-semibold text-white">Report an Issue</h2>
+              <button 
+                onClick={() => setIsModalOpen(false)}
+                className="text-gray-400 hover:text-white transition-colors"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            
+            <p className="text-gray-300 mb-6">
+              Help us improve our Digital Logic Tools by reporting any problems you encounter.
+            </p>
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label className="block text-white text-sm font-medium mb-2">Your Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  placeholder="Enter your name"
+                  required
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-calc-gold"
+                />
+              </div>
+
+              <div>
+                <label className="block text-white text-sm font-medium mb-2">Email Address</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  placeholder="Enter your email"
+                  required
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-calc-gold"
+                />
+              </div>
+
+              <div>
+                <label className="block text-white text-sm font-medium mb-2">Subject</label>
+                <input
+                  type="text"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleInputChange}
+                  placeholder="Brief issue summary"
+                  required
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-calc-gold"
+                />
+              </div>
+
+              <div>
+                <label className="block text-white text-sm font-medium mb-2">Description</label>
+                <textarea
+                  name="description"
+                  value={formData.description}
+                  onChange={handleInputChange}
+                  placeholder="Provide detailed information about the issue"
+                  required
+                  rows={4}
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-calc-gold resize-none"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full bg-white text-gray-900 font-semibold py-3 px-4 rounded-lg hover:bg-gray-100 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                </svg>
+                {isSubmitting ? 'Submitting...' : 'Submit Issue'}
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
