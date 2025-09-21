@@ -82,13 +82,13 @@ export default function BMICalculator() {
           </div>
 
           <div className="mb-5">
-            <label className="block mb-2.5 font-semibold">
+            <label className="block mb-2.5 font-semibold text-white">
               Unit System:
             </label>
             <select 
               value={unit} 
               onChange={(e) => setUnit(e.target.value as 'metric' | 'imperial')}
-              className="w-full p-2.5 rounded-lg border-2 border-gray-200 text-base"
+              className="w-full p-2.5 rounded-lg border-2 border-gray-600 bg-gray-800 text-white text-base focus:border-calc-gold focus:outline-none"
             >
               <option value="metric">Metric (kg, cm)</option>
               <option value="imperial">Imperial (lbs, inches)</option>
@@ -96,7 +96,7 @@ export default function BMICalculator() {
           </div>
 
           <div className="mb-5">
-            <label className="block mb-2.5 font-semibold">
+            <label className="block mb-2.5 font-semibold text-white">
               Weight ({unit === 'metric' ? 'kg' : 'lbs'}):
             </label>
             <input
@@ -104,12 +104,12 @@ export default function BMICalculator() {
               value={weight}
               onChange={(e) => setWeight(e.target.value)}
               placeholder={`Enter weight in ${unit === 'metric' ? 'kg' : 'lbs'}`}
-              className="w-full p-4 rounded-lg border-2 border-gray-200 text-xl"
+              className="w-full p-4 rounded-lg border-2 border-gray-600 bg-gray-800 text-white text-xl placeholder-gray-400 focus:border-calc-gold focus:outline-none"
             />
           </div>
 
           <div className="mb-5">
-            <label className="block mb-2.5 font-semibold">
+            <label className="block mb-2.5 font-semibold text-white">
               Height ({unit === 'metric' ? 'cm' : 'inches'}):
             </label>
             <input
@@ -117,7 +117,7 @@ export default function BMICalculator() {
               value={height}
               onChange={(e) => setHeight(e.target.value)}
               placeholder={`Enter height in ${unit === 'metric' ? 'cm' : 'inches'}`}
-              className="w-full p-4 rounded-lg border-2 border-gray-200 text-xl"
+              className="w-full p-4 rounded-lg border-2 border-gray-600 bg-gray-800 text-white text-xl placeholder-gray-400 focus:border-calc-gold focus:outline-none"
             />
           </div>
 
@@ -131,9 +131,9 @@ export default function BMICalculator() {
           </div>
 
           {result && (
-            <div className="mt-5 p-4 bg-gray-50 rounded-lg text-sm leading-relaxed">
-              <h4 className="mb-2.5 text-gray-800 font-semibold">BMI Categories:</h4>
-              <div className="grid grid-cols-2 gap-2.5">
+            <div className="mt-5 p-4 bg-gray-800 border border-gray-600 rounded-lg text-sm leading-relaxed">
+              <h4 className="mb-2.5 text-white font-semibold">BMI Categories:</h4>
+              <div className="grid grid-cols-2 gap-2.5 text-gray-300">
                 <div>Underweight: &lt; 18.5</div>
                 <div>Normal: 18.5 - 24.9</div>
                 <div>Overweight: 25 - 29.9</div>
