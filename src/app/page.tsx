@@ -35,6 +35,12 @@ export default function HomePage() {
       icon: '🧮'
     },
     {
+      id: 'cgpa',
+      name: 'CGPA Calculator',
+      description: 'Calculate Cumulative Grade Point Average',
+      icon: '🎓'
+    },
+    {
       id: 'percentage',
       name: 'Percentage Calculator',
       description: 'Calculate percentages and ratios',
