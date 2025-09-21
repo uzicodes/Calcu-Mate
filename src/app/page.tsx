@@ -79,11 +79,11 @@ export default function HomePage() {
               <Link
                 key={calculator.id}
                 href={`/calculator/${calculator.id}`}
-                className="calculator-card hover:border-calc-gold hover:shadow-calc-gold/20"
+                className="calculator-card"
               >
                 <div className="calculator-icon text-6xl">{calculator.icon}</div>
-                <h3 className="text-calc-dark font-semibold">{calculator.name}</h3>
-                <p className="text-gray-600">{calculator.description}</p>
+                <h3 className="font-semibold">{calculator.name}</h3>
+                <p>{calculator.description}</p>
               </Link>
             ))}
           </div>
