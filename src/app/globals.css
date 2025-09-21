@@ -133,6 +133,23 @@ body {
   @apply text-white;
 }
 
+/* Navbar styles */
+.navbar {
+  @apply border-b border-gray-700/50 backdrop-blur-sm bg-gray-900/80;
+}
+
+.navbar-brand {
+  @apply text-2xl font-bold text-calc-gold;
+}
+
+.navbar-button {
+  @apply bg-calc-gold hover:bg-calc-gold-light text-calc-dark font-semibold px-4 py-2 rounded-lg transition-colors duration-200;
+}
+
+.navbar-icon-button {
+  @apply p-2 rounded-lg bg-gray-800 hover:bg-gray-700 text-white transition-colors duration-200;
+}
+
 .calculator-grid {
   @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 w-full max-w-6xl;
 }
