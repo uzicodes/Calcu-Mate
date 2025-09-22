@@ -83,12 +83,6 @@ export default function CurrencyCalculator() {
         </div>
         
         <div className="calculator">
-          <div className="display">
-            <div className="current-operand">
-              {result ? `${amount} ${fromCurrency} = ${result} ${toCurrency}` : 'Enter amount to convert'}
-            </div>
-          </div>
-
           <div className="mb-5">
             <label className="block mb-2.5 font-semibold">
               Amount:
