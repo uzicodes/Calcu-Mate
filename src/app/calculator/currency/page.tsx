@@ -279,8 +279,22 @@ export default function CurrencyCalculator() {
   };
 
   return (
-    <div className="min-h-screen bg-calc-gradient">
-      <div className="calculator-container">
+    <div 
+      className="min-h-screen relative overflow-hidden"
+      style={{
+        backgroundImage: "url('/currency-bg.jpg')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'fixed'
+      }}
+    >
+      {/* Blurred overlay */}
+      <div className="absolute inset-0 backdrop-blur-sm bg-black/40"></div>
+      
+      {/* Content */}
+      <div className="relative z-10">
+        <div className="max-w-4xl mx-auto p-5 min-h-screen flex flex-col" style={{ backgroundColor: 'transparent' }}>
         <div className="calculator-header">
           <Link href="/" className="back-btn">← Back</Link>
           <h1>Currency Calculator</h1>
@@ -390,6 +404,7 @@ export default function CurrencyCalculator() {
             </div>
           )}
         </div>
+      </div>
       </div>
     </div>
   );
