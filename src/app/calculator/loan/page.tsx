@@ -56,24 +56,6 @@ export default function LoanCalculator() {
         </div>
         
         <div className="calculator">
-          <div className="display">
-            <div className="current-operand">
-              {result ? (
-                <div className="text-center">
-                  <div className="text-2xl font-bold mb-2.5">
-                    Monthly Payment: ${result.monthlyPayment.toLocaleString()}
-                  </div>
-                  <div className="text-lg mb-1">
-                    Total Payment: ${result.totalPayment.toLocaleString()}
-                  </div>
-                  <div className="text-lg text-gray-600">
-                    Total Interest: ${result.totalInterest.toLocaleString()}
-                  </div>
-                </div>
-              ) : 'Enter loan details to calculate payments'}
-            </div>
-          </div>
-
           <div className="mb-5">
             <label className="block mb-2.5 font-semibold">
               Loan Amount ($):

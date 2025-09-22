@@ -66,21 +66,6 @@ export default function BMICalculator() {
         </div>
         
         <div className="calculator">
-          <div className="display">
-            <div className="current-operand">
-              {result ? (
-                <div className="text-center">
-                  <div className="text-3xl font-bold mb-2.5">
-                    BMI: {result.bmi}
-                  </div>
-                  <div className="text-xl font-semibold" style={{ color: result.color }}>
-                    {result.category}
-                  </div>
-                </div>
-              ) : 'Enter your weight and height to calculate BMI'}
-            </div>
-          </div>
-
           <div className="mb-5">
             <label className="block mb-2.5 font-semibold text-white">
               Unit System:

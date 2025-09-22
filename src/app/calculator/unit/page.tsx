@@ -124,12 +124,6 @@ export default function UnitConverter() {
         </div>
         
         <div className="calculator">
-          <div className="display">
-            <div className="current-operand">
-              {result ? `${value} ${fromUnit} = ${result} ${toUnit}` : 'Enter value to convert'}
-            </div>
-          </div>
-
           <div className="mb-5">
             <label className="block mb-2.5 font-semibold">
               Category:
