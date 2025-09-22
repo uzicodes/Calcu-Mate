@@ -205,154 +205,153 @@ export default function ComplementConverter() {
   return (
     <div className="min-h-screen bg-calc-gradient">
       <div className="calculator-container">
-        <div className="calculator-content">
-          <div className="calculator-header">
-            <Link href="/" className="back-button">
-              ← Back
-            </Link>
-            <h1 className="calculator-title">1's & 2's Complement Converter</h1>
-          </div>
-
-          <p className="description">
-            Convert between <strong>decimal</strong> and <strong>1's or 2's complement</strong> binary. 
-            For decimal → complement, specify bit length (e.g. 8, 16).
-          </p>
-
-          <div className="grid grid-cols-3 gap-4 mb-5">
-            <div>
-              <label className="block mb-2.5 font-semibold">From</label>
-              <select 
-                value={fromType} 
-                onChange={(e) => setFromType(e.target.value)}
-                className="w-full p-2.5 rounded-lg border-2 border-gray-200 text-base"
-              >
-                <option value="decimal">Decimal</option>
-                <option value="binary">Binary</option>
-                <option value="ones-complement">Binary (1's comp)</option>
-                <option value="twos-complement">Binary (2's comp)</option>
-              </select>
-            </div>
-            
-            <div>
-              <label className="block mb-2.5 font-semibold">To</label>
-              <select 
-                value={toType} 
-                onChange={(e) => setToType(e.target.value)}
-                className="w-full p-2.5 rounded-lg border-2 border-gray-200 text-base"
-              >
-                <option value="decimal">Decimal</option>
-                <option value="binary">Binary</option>
-                <option value="ones-complement">Binary (1's comp)</option>
-                <option value="twos-complement">Binary (2's comp)</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block mb-2.5 font-semibold">Bit Length</label>
-              <select 
-                value={bitLength} 
-                onChange={(e) => setBitLength(parseInt(e.target.value))}
-                className="w-full p-2.5 rounded-lg border-2 border-gray-200 text-base"
-              >
-                <option value={4}>4 bits</option>
-                <option value={8}>8 bits</option>
-                <option value={16}>16 bits</option>
-                <option value={32}>32 bits</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="mb-5">
-            <label className="block mb-2.5 font-semibold">Number</label>
-            <input
-              type="text"
-              value={number}
-              onChange={(e) => setNumber(e.target.value)}
-              placeholder={fromType === 'decimal' ? 'Enter decimal number' : 'Enter binary number'}
-              className="w-full p-4 rounded-lg border-2 border-gray-200 text-xl"
-            />
-          </div>
-
-          <div className="buttons mb-5">
-            <button className="btn btn-equals" onClick={convert} style={{ gridColumn: 'span 2' }}>
-              Convert
-            </button>
-            <button className="btn btn-clear" onClick={clear} style={{ gridColumn: 'span 2' }}>
-              Clear
-            </button>
-          </div>
-
-          <div className="conversion-output">
-            <h3>Conversion Output</h3>
-            <div className="result-tabs">
-              <button 
-                className={`tab ${!showSteps ? 'active' : ''}`}
-                onClick={() => setShowSteps(false)}
-              >
-                Result
-              </button>
-              <button 
-                className={`tab ${showSteps ? 'active' : ''}`}
-                onClick={() => setShowSteps(true)}
-              >
-                Steps
-              </button>
-            </div>
-            
-            <div className="result-content">
-              {!result ? (
-                <div className="no-result">
-                  No conversion yet. Enter data and click "Convert."
-                </div>
-              ) : !showSteps ? (
-                <div className="result-display">
-                  <strong>{result}</strong>
-                </div>
-              ) : (
-                <div className="steps-display">
-                  {steps.map((step, index) => (
-                    <div key={index} className="step">
-                      {step}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
+        <div className="calculator-header">
+          <Link href="/" className="back-btn">← Back</Link>
+          <h1>1's & 2's Complement Converter</h1>
         </div>
-      </div>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Calculator Section - Takes 2/3 width on large screens */}
+          <div className="lg:col-span-2">
+            <div className="calculator">
+              <div className="grid grid-cols-3 gap-4 mb-5">
+                <div>
+                  <label className="block mb-2.5 font-semibold text-white">From</label>
+                  <select 
+                    value={fromType} 
+                    onChange={(e) => setFromType(e.target.value)}
+                    className="w-full p-2.5 rounded-lg bg-gray-800 border-2 border-gray-600 text-white text-base focus:border-calc-gold"
+                  >
+                    <option value="decimal">Decimal</option>
+                    <option value="binary">Binary</option>
+                    <option value="ones-complement">Binary (1's comp)</option>
+                    <option value="twos-complement">Binary (2's comp)</option>
+                  </select>
+                </div>
+                
+                <div>
+                  <label className="block mb-2.5 font-semibold text-white">To</label>
+                  <select 
+                    value={toType} 
+                    onChange={(e) => setToType(e.target.value)}
+                    className="w-full p-2.5 rounded-lg bg-gray-800 border-2 border-gray-600 text-white text-base focus:border-calc-gold"
+                  >
+                    <option value="decimal">Decimal</option>
+                    <option value="binary">Binary</option>
+                    <option value="ones-complement">Binary (1's comp)</option>
+                    <option value="twos-complement">Binary (2's comp)</option>
+                  </select>
+                </div>
 
-      <div className="learning-resources">
-        <div className="resources-content">
-          <h3>📚 Learning Resources</h3>
-          
-          <div className="section">
-            <h4>Sample Problems</h4>
-            <ul>
-              {sampleProblems.map((problem, index) => (
-                <li key={index}>
-                  ({problem.binary})<sub>2</sub> ⇒ ({problem.decimal})<sub>10</sub>
-                </li>
-              ))}
-            </ul>
-            <p>
-              For these, pick "From=Binary (2's comp)" or "From=Binary (1's comp)" 
-              and "To=Decimal," paste the bits, then click "Convert."
-            </p>
+                <div>
+                  <label className="block mb-2.5 font-semibold text-white">Bit Length</label>
+                  <select 
+                    value={bitLength} 
+                    onChange={(e) => setBitLength(parseInt(e.target.value))}
+                    className="w-full p-2.5 rounded-lg bg-gray-800 border-2 border-gray-600 text-white text-base focus:border-calc-gold"
+                  >
+                    <option value={4}>4 bits</option>
+                    <option value={8}>8 bits</option>
+                    <option value={16}>16 bits</option>
+                    <option value={32}>32 bits</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="mb-5">
+                <label className="block mb-2.5 font-semibold text-white">Number</label>
+                <input
+                  type="text"
+                  value={number}
+                  onChange={(e) => setNumber(e.target.value)}
+                  placeholder={fromType === 'decimal' ? 'Enter decimal number' : 'Enter binary number'}
+                  className="w-full p-4 rounded-lg bg-gray-800 border-2 border-gray-600 text-white text-xl focus:border-calc-gold"
+                />
+              </div>
+
+              <div className="flex gap-4 mb-5 justify-center">
+                <button className="px-6 py-3 bg-calc-gold text-gray-900 rounded-lg font-medium hover:bg-calc-gold-light transition-colors" onClick={convert}>
+                  Convert
+                </button>
+                <button className="px-6 py-3 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 transition-colors" onClick={clear}>
+                  Clear
+                </button>
+              </div>
+
+              <div className="display mt-5">
+                <div className="current-operand">
+                  <div className="mb-4">
+                    <h3 className="text-xl font-bold text-calc-gold mb-3">Conversion Output</h3>
+                    <div className="flex gap-2 mb-4">
+                      <button 
+                        className={`px-4 py-2 rounded text-sm font-medium ${!showSteps ? 'bg-calc-gold text-gray-900' : 'bg-gray-700 text-white'}`}
+                        onClick={() => setShowSteps(false)}
+                      >
+                        Result
+                      </button>
+                      <button 
+                        className={`px-4 py-2 rounded text-sm font-medium ${showSteps ? 'bg-calc-gold text-gray-900' : 'bg-gray-700 text-white'}`}
+                        onClick={() => setShowSteps(true)}
+                      >
+                        Steps
+                      </button>
+                    </div>
+                    
+                    <div className="bg-gray-800 p-4 rounded-lg border border-gray-600">
+                      {!result ? (
+                        <div className="text-gray-400 text-center">
+                          No conversion yet. Enter data and click "Convert."
+                        </div>
+                      ) : !showSteps ? (
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-calc-gold">{result}</div>
+                        </div>
+                      ) : (
+                        <div className="space-y-2">
+                          {steps.map((step, index) => (
+                            <div key={index} className="text-sm text-gray-300 border-b border-gray-700 pb-2 last:border-0">
+                              {step}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div className="section">
-            <h4>Decimal → Complement</h4>
-            <p>
-              Enter a decimal number (e.g. -23) then choose "To=Binary (2's comp)" 
-              or "To=Binary (1's comp)." Specify the bit length (8, 16, etc.) to see how 
-              negative values are stored.
-            </p>
-          </div>
+          {/* Learning Resources Section - Takes 1/3 width on large screens */}
+          <div className="lg:col-span-1">
+            <div className="bg-gray-800 rounded-lg p-6 h-fit">
+              <h3 className="text-xl font-bold text-calc-gold mb-4">📚 Learning Resources</h3>
+              
+              <div className="mb-6">
+                <h4 className="text-lg font-semibold text-white mb-3">Sample Problems</h4>
+                <ul className="space-y-2">
+                  {sampleProblems.map((problem, index) => (
+                    <li key={index} className="text-gray-300">
+                      ({problem.binary})<sub>2</sub> ⇒ ({problem.decimal})<sub>10</sub>
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-gray-400 mt-3 text-sm">
+                  For these, pick "From=Binary (2's comp)" or "From=Binary (1's comp)" 
+                  and "To=Decimal," paste the bits, then click "Convert."
+                </p>
+              </div>
 
-          <button className="tutorial-button">
-            View Full Tutorial
-          </button>
+              <div className="mb-6">
+                <h4 className="text-lg font-semibold text-white mb-3">Decimal → Complement</h4>
+                <p className="text-gray-400 text-sm">
+                  Enter a decimal number (e.g. -23) then choose "To=Binary (2's comp)" 
+                  or "To=Binary (1's comp)." Specify the bit length (8, 16, etc.) to see how 
+                  negative values are stored.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
