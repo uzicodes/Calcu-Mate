@@ -83,6 +83,12 @@ export default function HomePage() {
       icon: '🔀'
     },
     {
+      id: 'complement',
+      name: 'Complement\'s Converter',
+      description: '1s & 2s complement conversions',
+      icon: '🔄'
+    },
+    {
       id: 'truth-table',
       name: 'Truth Table Generator',
       description: 'Create & analyze truth tables for boolean expressions',
