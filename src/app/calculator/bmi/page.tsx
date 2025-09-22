@@ -121,11 +121,11 @@ export default function BMICalculator() {
             />
           </div>
 
-          <div className="buttons">
-            <button className="btn btn-equals" onClick={calculateBMI} style={{ gridColumn: 'span 2' }}>
+          <div className="flex gap-4 mb-5 justify-center">
+            <button className="px-6 py-3 bg-calc-gold text-gray-900 rounded-lg font-medium hover:bg-calc-gold-light transition-colors" onClick={calculateBMI}>
               Calculate BMI
             </button>
-            <button className="btn btn-clear" onClick={clear} style={{ gridColumn: 'span 2' }}>
+            <button className="px-6 py-3 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 transition-colors" onClick={clear}>
               Clear
             </button>
           </div>
