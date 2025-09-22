@@ -55,12 +55,6 @@ export default function PercentageCalculator() {
         </div>
         
         <div className="calculator">
-          <div className="display">
-            <div className="current-operand">
-              {result ? `Result: ${result}` : 'Enter values to calculate'}
-            </div>
-          </div>
-
           <div className="mb-5">
             <label className="block mb-2.5 font-semibold">
               Calculation Type:

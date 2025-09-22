@@ -1,7 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+
+interface ExchangeRates {
+  [key: string]: number;
+}
 
 export default function CurrencyCalculator() {
   const [amount, setAmount] = useState<string>('');
@@ -9,8 +13,12 @@ export default function CurrencyCalculator() {
   const [toCurrency, setToCurrency] = useState<string>('EUR');
   const [result, setResult] = useState<string>('');
   const [rate, setRate] = useState<string>('');
+  const [exchangeRates, setExchangeRates] = useState<ExchangeRates>({});
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [lastUpdated, setLastUpdated] = useState<string>('');
 
-  const exchangeRates: { [key: string]: number } = {
+  // Fallback static rates (backup if API fails)
+  const fallbackRates: ExchangeRates = {
     USD: 1,
     EUR: 0.85,
     GBP: 0.73,
@@ -23,6 +31,36 @@ export default function CurrencyCalculator() {
     BRL: 5.2,
     BDT: 110
   };
+
+  // Fetch real-time exchange rates
+  const fetchExchangeRates = async (): Promise<void> => {
+    setIsLoading(true);
+    try {
+      const response = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
+      const data = await response.json();
+      
+      if (data && data.rates) {
+        setExchangeRates({ USD: 1, ...data.rates });
+        setLastUpdated(new Date().toLocaleString());
+      } else {
+        // Use fallback rates if API response is invalid
+        setExchangeRates(fallbackRates);
+        setLastUpdated('Using fallback rates');
+      }
+    } catch (error) {
+      console.error('Failed to fetch exchange rates:', error);
+      // Use fallback rates if API fails
+      setExchangeRates(fallbackRates);
+      setLastUpdated('Using fallback rates');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Load rates on component mount
+  useEffect(() => {
+    fetchExchangeRates();
+  }, []);
 
   const calculateCurrency = (): void => {
     const amt = parseFloat(amount);
@@ -58,7 +96,10 @@ export default function CurrencyCalculator() {
     setResult('');
   };
 
-  const currencies = Object.keys(exchangeRates);
+  // Get available currencies (use fallback if rates not loaded)
+  const currencies = Object.keys(exchangeRates).length > 0 
+    ? Object.keys(exchangeRates).sort() 
+    : Object.keys(fallbackRates).sort();
   
   const currencyNames: { [key: string]: string } = {
     USD: 'USD (United States)',
@@ -80,6 +121,25 @@ export default function CurrencyCalculator() {
         <div className="calculator-header">
           <Link href="/" className="back-btn">← Back</Link>
           <h1>Currency Calculator</h1>
+        </div>
+        
+        {/* Exchange Rate Status */}
+        <div className="mb-4 p-3 bg-gray-800 border border-gray-600 rounded-lg flex justify-between items-center">
+          <div className="text-sm text-gray-300">
+            <span className="font-semibold">Rates: </span>
+            {isLoading ? (
+              <span className="text-yellow-400">Updating...</span>
+            ) : (
+              <span className="text-green-400">{lastUpdated}</span>
+            )}
+          </div>
+          <button
+            onClick={fetchExchangeRates}
+            disabled={isLoading}
+            className="px-3 py-1.5 bg-calc-gold text-gray-900 rounded text-sm font-medium hover:bg-calc-gold-light transition-colors disabled:opacity-50"
+          >
+            {isLoading ? 'Updating...' : 'Refresh Rates'}
+          </button>
         </div>
         
         <div className="calculator">
