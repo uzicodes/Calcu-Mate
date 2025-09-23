@@ -90,6 +90,30 @@ export default function CGPACalculator() {
   const [currentCourse, setCurrentCourse] = useState({ name: '', credit: 3, grade: 'A' });
   const [isCalculated, setIsCalculated] = useState(false);
 
+  // Handle university change - reset calculation and update default grade
+  const handleUniversityChange = (universityName: string) => {
+    const newUniversity = universities.find(u => u.name === universityName) || universities[0];
+    setSelectedUniversity(newUniversity);
+    
+    // Reset calculation when university changes
+    setIsCalculated(false);
+    
+    // Update current course grade to first available grade in new university
+    const firstGrade = Object.keys(newUniversity.gradePoints)[0] || 'A';
+    setCurrentCourse(prev => ({ ...prev, grade: firstGrade }));
+    
+    // Validate existing courses - if any course has a grade not available in new university,
+    // set it to the first available grade
+    setCourses(prevCourses => 
+      prevCourses.map(course => {
+        if (!newUniversity.gradePoints.hasOwnProperty(course.grade)) {
+          return { ...course, grade: firstGrade };
+        }
+        return course;
+      })
+    );
+  };
+
   const addCourse = () => {
     if (currentCourse.name.trim()) {
       const newCourse: Course = {
@@ -99,7 +123,7 @@ export default function CGPACalculator() {
         grade: currentCourse.grade
       };
       setCourses([...courses, newCourse]);
-      setCurrentCourse({ name: '', credit: 3, grade: 'A' });
+      setCurrentCourse({ name: '', credit: 3, grade: Object.keys(selectedUniversity.gradePoints)[0] || 'A' });
       setIsCalculated(false);
     }
   };
@@ -123,6 +147,7 @@ export default function CGPACalculator() {
     let totalCredits = 0;
 
     courses.forEach(course => {
+      // Use the selected university's grading system for calculation
       const gradePoint = selectedUniversity.gradePoints[course.grade] || 0;
       totalGradePoints += gradePoint * course.credit;
       totalCredits += course.credit;
@@ -143,29 +168,104 @@ export default function CGPACalculator() {
 
   const exportToPDF = () => {
     const result = calculateCGPA();
-    const content = `
-CGPA CALCULATION REPORT
-University: ${selectedUniversity.name}
-Date: ${new Date().toLocaleDateString()}
-
-COURSES:
-${courses.map((course, index) => 
-  `${index + 1}. ${course.name} - Credit: ${course.credit} - Grade: ${course.grade} (${selectedUniversity.gradePoints[course.grade]})`
-).join('\n')}
-
-RESULTS:
-Total Credits: ${result.totalCredits}
-Total Grade Points: ${result.totalGradePoints}
-CGPA: ${result.cgpa}
+    
+    // Create HTML content for PDF
+    const htmlContent = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="utf-8">
+        <title>CGPA Report</title>
+        <style>
+          body { font-family: Arial, sans-serif; margin: 40px; }
+          .header { text-align: center; margin-bottom: 30px; }
+          .university { color: #666; margin-bottom: 10px; }
+          .date { color: #888; font-size: 14px; }
+          .courses-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+          .courses-table th, .courses-table td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+          .courses-table th { background-color: #8B5A96; color: white; }
+          .results { background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin-top: 20px; }
+          .results h3 { color: #8B5A96; margin-top: 0; }
+          .cgpa-value { font-size: 24px; font-weight: bold; color: #8B5A96; }
+        </style>
+      </head>
+      <body>
+        <div class="header">
+          <h1>CGPA CALCULATION REPORT</h1>
+          <div class="university">University: ${selectedUniversity.name}</div>
+          <div class="date">Generated on: ${new Date().toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+          })}</div>
+        </div>
+        
+        <h2>Course Details</h2>
+        <table class="courses-table">
+          <thead>
+            <tr>
+              <th>S.No.</th>
+              <th>Course Name</th>
+              <th>Credit Hours</th>
+              <th>Grade</th>
+              <th>Grade Points</th>
+              <th>Total Points</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${courses.map((course, index) => {
+              const gradePoint = selectedUniversity.gradePoints[course.grade] || 0;
+              const totalPoints = gradePoint * course.credit;
+              return `
+                <tr>
+                  <td>${index + 1}</td>
+                  <td>${course.name}</td>
+                  <td>${course.credit}</td>
+                  <td>${course.grade}</td>
+                  <td>${gradePoint}</td>
+                  <td>${totalPoints.toFixed(2)}</td>
+                </tr>
+              `;
+            }).join('')}
+          </tbody>
+        </table>
+        
+        <div class="results">
+          <h3>CALCULATION SUMMARY</h3>
+          <p><strong>Total Credit Hours:</strong> ${result.totalCredits}</p>
+          <p><strong>Total Grade Points:</strong> ${result.totalGradePoints}</p>
+          <p><strong>CGPA:</strong> <span class="cgpa-value">${result.cgpa}</span></p>
+        </div>
+        
+        <div style="margin-top: 40px; text-align: center; color: #888; font-size: 12px;">
+          Generated by Calcu-Mate CGPA Calculator
+        </div>
+      </body>
+      </html>
     `;
 
-    const blob = new Blob([content], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `CGPA_Report_${selectedUniversity.name}_${new Date().toLocaleDateString().replace(/\//g, '-')}.txt`;
-    a.click();
-    URL.revokeObjectURL(url);
+    // Create a new window for printing
+    const printWindow = window.open('', '_blank');
+    if (printWindow) {
+      printWindow.document.write(htmlContent);
+      printWindow.document.close();
+      
+      // Wait for content to load then trigger print dialog
+      printWindow.onload = () => {
+        setTimeout(() => {
+          printWindow.print();
+        }, 250);
+      };
+    } else {
+      // Fallback: create downloadable HTML file if popup blocked
+      const blob = new Blob([htmlContent], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `CGPA_Report_${selectedUniversity.name}_${new Date().toLocaleDateString().replace(/\//g, '-')}.html`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
   };
 
   const result = calculateCGPA();
@@ -184,7 +284,7 @@ CGPA: ${result.cgpa}
             <label className="text-white">Your University:</label>
             <select 
               value={selectedUniversity.name}
-              onChange={(e) => setSelectedUniversity(universities.find(u => u.name === e.target.value) || universities[0])}
+              onChange={(e) => handleUniversityChange(e.target.value)}
               className="bg-gray-800 text-white border border-gray-600 rounded px-3 py-2"
             >
               {universities.map(uni => (
@@ -312,7 +412,7 @@ CGPA: ${result.cgpa}
                 <div className="text-center">
                   <button
                     onClick={exportToPDF}
-                    className="bg-gray-600 text-white px-6 py-3 rounded hover:bg-gray-700 transition-colors"
+                    className="bg-[#61BD6A] text-white px-6 py-3 rounded hover:bg-[#4fa357] transition-colors"
                   >
                     Export Grades ⬇
                   </button>
