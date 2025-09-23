@@ -87,7 +87,11 @@ const universities: University[] = [
 export default function CGPACalculator() {
   const [selectedUniversity, setSelectedUniversity] = useState<University>(universities[0]);
   const [courses, setCourses] = useState<Course[]>([]);
-  const [currentCourse, setCurrentCourse] = useState({ name: '', credit: 3, grade: 'A' });
+  const [currentCourse, setCurrentCourse] = useState({ 
+    name: '', 
+    credit: 3, 
+    grade: Object.keys(universities[0].gradePoints)[0] || 'A' 
+  });
   const [isCalculated, setIsCalculated] = useState(false);
 
   // Handle university change - reset calculation and update default grade
@@ -167,7 +171,13 @@ export default function CGPACalculator() {
   };
 
   const exportToPDF = () => {
-    const result = calculateCGPA();
+    try {
+      const result = calculateCGPA();
+      
+      if (courses.length === 0) {
+        alert('Please add courses before exporting.');
+        return;
+      }
     
     // Create HTML content for PDF
     const htmlContent = `
@@ -265,6 +275,10 @@ export default function CGPACalculator() {
       a.download = `CGPA_Report_${selectedUniversity.name}_${new Date().toLocaleDateString().replace(/\//g, '-')}.html`;
       a.click();
       URL.revokeObjectURL(url);
+    }
+    } catch (error) {
+      console.error('Error exporting PDF:', error);
+      alert('Failed to export PDF. Please try again.');
     }
   };
 
