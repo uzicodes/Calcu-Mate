@@ -60,57 +60,55 @@ export default function AgeCalculator() {
 
   return (
     <div className="min-h-screen bg-calc-gradient">
-      <div className="calculator-container">
+      <div className="max-w-md mx-auto p-4 min-h-screen flex flex-col">
         <div className="calculator-header">
           <Link href="/" className="back-btn">← Back</Link>
           <h1>Age Calculator</h1>
         </div>
         
-        <div className="calculator">
-          <div className="display">
-            <div className="current-operand">
-              {result ? (
-                <div className="text-center">
-                  <div className="text-2xl font-bold mb-2.5">
-                    Age: {result.years} years, {result.months} months, {result.days} days
-                  </div>
-                  <div className="text-lg">
-                    Total days: {result.totalDays.toLocaleString()}
-                  </div>
+        <div className="bg-gray-900 rounded-2xl p-6 shadow-2xl flex-1 text-white">
+          {result && (
+            <div className="mb-4 p-3 bg-green-100 rounded-lg border-2 border-green-300">
+              <div className="text-center">
+                <div className="text-lg font-bold mb-2 text-green-800">
+                  Age: {result.years} years, {result.months} months, {result.days} days
                 </div>
-              ) : 'Enter your birth date to calculate age'}
+                <div className="text-sm text-green-700">
+                  Total days: {result.totalDays.toLocaleString()}
+                </div>
+              </div>
             </div>
-          </div>
+          )}
 
-          <div className="mb-5">
-            <label className="block mb-2.5 font-semibold">
+          <div className="mb-4">
+            <label className="block mb-2 font-medium text-sm">
               Birth Date:
             </label>
             <input
               type="date"
               value={birthDate}
               onChange={(e) => setBirthDate(e.target.value)}
-              className="w-full p-4 rounded-lg border-2 border-gray-200 text-xl"
+              className="w-full p-3 rounded-lg border-2 border-gray-200 text-base text-gray-900"
             />
           </div>
 
-          <div className="mb-5">
-            <label className="block mb-2.5 font-semibold">
+          <div className="mb-4">
+            <label className="block mb-2 font-medium text-sm">
               Current Date (optional):
             </label>
             <input
               type="date"
               value={currentDate}
               onChange={(e) => setCurrentDate(e.target.value)}
-              className="w-full p-4 rounded-lg border-2 border-gray-200 text-xl"
+              className="w-full p-3 rounded-lg border-2 border-gray-200 text-base text-gray-900"
             />
           </div>
 
-          <div className="flex gap-4 mb-5 justify-center">
-            <button className="px-6 py-3 bg-calc-gold text-gray-900 rounded-lg font-medium hover:bg-calc-gold-light transition-colors" onClick={calculateAge}>
+          <div className="flex gap-3 mb-4 justify-center">
+            <button className="px-4 py-2 bg-calc-gold text-gray-900 rounded-lg font-medium hover:bg-calc-gold-light transition-colors text-sm" onClick={calculateAge}>
               Calculate Age
             </button>
-            <button className="px-6 py-3 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 transition-colors" onClick={clear}>
+            <button className="px-4 py-2 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 transition-colors text-sm" onClick={clear}>
               Clear
             </button>
           </div>
