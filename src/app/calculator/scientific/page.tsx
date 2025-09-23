@@ -144,57 +144,57 @@ export default function ScientificCalculator() {
 
   return (
     <div className="min-h-screen bg-calc-gradient">
-      <div className="calculator-container">
-        <div className="calculator-header">
-          <Link href="/" className="back-btn">← Back</Link>
-          <h1>Scientific Calculator</h1>
+      <div className="max-w-lg mx-auto p-4 min-h-screen flex flex-col">
+        <div className="calculator-header mb-4">
+          <Link href="/" className="back-btn text-base px-4 py-2">← Back</Link>
+          <h1 className="text-2xl">Scientific Calculator</h1>
         </div>
         
         <div className="calculator">
-          <div className="display">
-            <div className="previous-operand">
+          <div className="display mb-4 p-4 bg-gray-800 border border-gray-600 rounded-lg">
+            <div className="previous-operand text-sm text-gray-400 h-5">
               {operation ? `${previousOperand} ${getOperationSymbol(operation)}` : ''}
             </div>
-            <div className="current-operand">{currentOperand}</div>
+            <div className="current-operand text-2xl text-white font-bold">{currentOperand}</div>
           </div>
           
-          <div className="scientific-buttons">
-            <button className="scientific-btn" onClick={() => performScientificFunction('sin')}>sin</button>
-            <button className="scientific-btn" onClick={() => performScientificFunction('cos')}>cos</button>
-            <button className="scientific-btn" onClick={() => performScientificFunction('tan')}>tan</button>
-            <button className="scientific-btn" onClick={() => performScientificFunction('log')}>log</button>
-            <button className="scientific-btn" onClick={() => performScientificFunction('ln')}>ln</button>
+          <div className="grid grid-cols-5 gap-2 mb-3">
+            <button className="bg-blue-600 text-white text-sm py-2 px-2 rounded font-medium hover:bg-blue-700 transition-colors" onClick={() => performScientificFunction('sin')}>sin</button>
+            <button className="bg-blue-600 text-white text-sm py-2 px-2 rounded font-medium hover:bg-blue-700 transition-colors" onClick={() => performScientificFunction('cos')}>cos</button>
+            <button className="bg-blue-600 text-white text-sm py-2 px-2 rounded font-medium hover:bg-blue-700 transition-colors" onClick={() => performScientificFunction('tan')}>tan</button>
+            <button className="bg-blue-600 text-white text-sm py-2 px-2 rounded font-medium hover:bg-blue-700 transition-colors" onClick={() => performScientificFunction('log')}>log</button>
+            <button className="bg-blue-600 text-white text-sm py-2 px-2 rounded font-medium hover:bg-blue-700 transition-colors" onClick={() => performScientificFunction('ln')}>ln</button>
             
-            <button className="scientific-btn" onClick={() => performScientificFunction('sqrt')}>√</button>
-            <button className="scientific-btn" onClick={() => performScientificFunction('square')}>x²</button>
-            <button className="scientific-btn" onClick={() => performScientificFunction('pi')}>π</button>
-            <button className="scientific-btn" onClick={() => performScientificFunction('e')}>e</button>
-            <button className="scientific-btn" onClick={() => chooseOperation('^')}>x^y</button>
+            <button className="bg-blue-600 text-white text-sm py-2 px-2 rounded font-medium hover:bg-blue-700 transition-colors" onClick={() => performScientificFunction('sqrt')}>√</button>
+            <button className="bg-blue-600 text-white text-sm py-2 px-2 rounded font-medium hover:bg-blue-700 transition-colors" onClick={() => performScientificFunction('square')}>x²</button>
+            <button className="bg-blue-600 text-white text-sm py-2 px-2 rounded font-medium hover:bg-blue-700 transition-colors" onClick={() => performScientificFunction('pi')}>π</button>
+            <button className="bg-blue-600 text-white text-sm py-2 px-2 rounded font-medium hover:bg-blue-700 transition-colors" onClick={() => performScientificFunction('e')}>e</button>
+            <button className="bg-blue-600 text-white text-sm py-2 px-2 rounded font-medium hover:bg-blue-700 transition-colors" onClick={() => chooseOperation('^')}>x^y</button>
           </div>
           
-          <div className="buttons">
-            <button className="btn btn-clear" onClick={clear}>C</button>
-            <button className="btn btn-operator" onClick={deleteLast}>⌫</button>
-            <button className="btn btn-operator" onClick={() => chooseOperation('/')}>/</button>
-            <button className="btn btn-operator" onClick={() => chooseOperation('*')}>×</button>
+          <div className="grid grid-cols-4 gap-2">
+            <button className="bg-red-600 text-white text-base py-3 rounded font-medium hover:bg-red-700 transition-colors" onClick={clear}>C</button>
+            <button className="bg-orange-600 text-white text-base py-3 rounded font-medium hover:bg-orange-700 transition-colors" onClick={deleteLast}>⌫</button>
+            <button className="bg-orange-600 text-white text-base py-3 rounded font-medium hover:bg-orange-700 transition-colors" onClick={() => chooseOperation('/')}>/</button>
+            <button className="bg-orange-600 text-white text-base py-3 rounded font-medium hover:bg-orange-700 transition-colors" onClick={() => chooseOperation('*')}>×</button>
             
-            <button className="btn btn-number" onClick={() => appendNumber('7')}>7</button>
-            <button className="btn btn-number" onClick={() => appendNumber('8')}>8</button>
-            <button className="btn btn-number" onClick={() => appendNumber('9')}>9</button>
-            <button className="btn btn-operator" onClick={() => chooseOperation('-')}>-</button>
+            <button className="bg-gray-700 text-white text-base py-3 rounded font-medium hover:bg-gray-600 transition-colors" onClick={() => appendNumber('7')}>7</button>
+            <button className="bg-gray-700 text-white text-base py-3 rounded font-medium hover:bg-gray-600 transition-colors" onClick={() => appendNumber('8')}>8</button>
+            <button className="bg-gray-700 text-white text-base py-3 rounded font-medium hover:bg-gray-600 transition-colors" onClick={() => appendNumber('9')}>9</button>
+            <button className="bg-orange-600 text-white text-base py-3 rounded font-medium hover:bg-orange-700 transition-colors" onClick={() => chooseOperation('-')}>-</button>
             
-            <button className="btn btn-number" onClick={() => appendNumber('4')}>4</button>
-            <button className="btn btn-number" onClick={() => appendNumber('5')}>5</button>
-            <button className="btn btn-number" onClick={() => appendNumber('6')}>6</button>
-            <button className="btn btn-operator" onClick={() => chooseOperation('+')}>+</button>
+            <button className="bg-gray-700 text-white text-base py-3 rounded font-medium hover:bg-gray-600 transition-colors" onClick={() => appendNumber('4')}>4</button>
+            <button className="bg-gray-700 text-white text-base py-3 rounded font-medium hover:bg-gray-600 transition-colors" onClick={() => appendNumber('5')}>5</button>
+            <button className="bg-gray-700 text-white text-base py-3 rounded font-medium hover:bg-gray-600 transition-colors" onClick={() => appendNumber('6')}>6</button>
+            <button className="bg-orange-600 text-white text-base py-3 rounded font-medium hover:bg-orange-700 transition-colors" onClick={() => chooseOperation('+')}>+</button>
             
-            <button className="btn btn-number" onClick={() => appendNumber('1')}>1</button>
-            <button className="btn btn-number" onClick={() => appendNumber('2')}>2</button>
-            <button className="btn btn-number" onClick={() => appendNumber('3')}>3</button>
-            <button className="btn btn-equals" onClick={calculate} style={{ gridRow: 'span 2' }}>=</button>
+            <button className="bg-gray-700 text-white text-base py-3 rounded font-medium hover:bg-gray-600 transition-colors" onClick={() => appendNumber('1')}>1</button>
+            <button className="bg-gray-700 text-white text-base py-3 rounded font-medium hover:bg-gray-600 transition-colors" onClick={() => appendNumber('2')}>2</button>
+            <button className="bg-gray-700 text-white text-base py-3 rounded font-medium hover:bg-gray-600 transition-colors" onClick={() => appendNumber('3')}>3</button>
+            <button className="bg-calc-gold text-gray-900 text-base py-3 rounded font-medium hover:bg-calc-gold-light transition-colors row-span-2" onClick={calculate}>=</button>
             
-            <button className="btn btn-number btn-zero" onClick={() => appendNumber('0')}>0</button>
-            <button className="btn btn-number" onClick={appendDecimal}>.</button>
+            <button className="bg-gray-700 text-white text-base py-3 rounded font-medium hover:bg-gray-600 transition-colors col-span-2" onClick={() => appendNumber('0')}>0</button>
+            <button className="bg-gray-700 text-white text-base py-3 rounded font-medium hover:bg-gray-600 transition-colors" onClick={appendDecimal}>.</button>
           </div>
         </div>
       </div>

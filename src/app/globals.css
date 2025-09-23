@@ -111,7 +111,7 @@ body {
 }
 
 .scientific-btn {
-  @apply p-4 text-base font-medium border-none rounded-lg cursor-pointer transition-all duration-200 bg-calc-gold-light text-calc-dark hover:bg-calc-gold hover:-translate-y-0.5 font-semibold;
+  @apply p-4 text-base border-none rounded-lg cursor-pointer transition-all duration-200 bg-calc-gold-light text-calc-dark hover:bg-calc-gold hover:-translate-y-0.5 font-semibold;
 }
 
 /* Form elements for dark theme */
